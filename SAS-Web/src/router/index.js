@@ -4,7 +4,7 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/demo'
+        redirect: '/rota'
     },
     {
         path: '/demo',
@@ -14,6 +14,26 @@ const routes = [
             title: '示例页面',
             freeAuth: true
         }
+    },
+    {
+        path: '/head',
+        name: 'head',
+        component: () => import('../pages/user/head.vue'),
+        meta: {
+            title: '导航栏',
+            freeAuth: true
+        },
+        children: [
+            {
+                path: '/rota',
+                name: 'rota',
+                component: () => import('../pages/user/rota.vue'),
+                meta: {
+                    title: '花名册',
+                    freeAuth: true
+                }
+            }
+        ],
     }
 ];
 
