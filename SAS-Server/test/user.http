@@ -1,0 +1,44 @@
+### 获取用户列表
+GET http://127.0.0.1:33001/api/user/getUserList
+Content-Type: application/json
+
+
+
+### 获取用户详细信息
+GET http://127.0.0.1:33001/api/user/getUserInfo
+    ?userId=23209010001
+
+### 新建搜索会话
+POST http://127.0.0.1:33001/api/ai/newSearch
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMTk1ZGJhZC1hZjY5LTc4ZDYtOGY4OC0xYzEwYWE5ZTRlMmUiLCJzdHVkZW50SWQiOiIyMzIwOTA2MDE4MSIsInVzZXJOYW1lIjoi5ZC0IiwiaWF0IjoxNzQzMTQ3NDIxLCJleHAiOjE3NDMxOTA2MjF9.4vmvYqVdVFxNF1pt7s_sahlm8hav1Lm2TEwUBlw4__M
+
+### 发送搜索请求
+POST http://127.0.0.1:33001/api/ai/searchResponse
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMTk1ZGJhZC1hZjY5LTc4ZDYtOGY4OC0xYzEwYWE5ZTRlMmUiLCJzdHVkZW50SWQiOiIyMzIwOTA2MDE4MSIsInVzZXJOYW1lIjoi5ZC0IiwiaWF0IjoxNzQzMTQ3NDIxLCJleHAiOjE3NDMxOTA2MjF9.4vmvYqVdVFxNF1pt7s_sahlm8hav1Lm2TEwUBlw4__M
+
+{
+    "conversation_id":"a6d1e0e3-180b-4397-b195-08d8da61a311",
+    "query": "蔡徐坤"
+}
+
+### 发送消息
+POST http://127.0.0.1:33001/api/ai/sendMessage
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMTk1ZGJhZC1hZjY5LTc4ZDYtOGY4OC0xYzEwYWE5ZTRlMmUiLCJzdHVkZW50SWQiOiIyMzIwOTA2MDE4MSIsInVzZXJOYW1lIjoi5ZC0IiwiaWF0IjoxNzQzMTQ3NDIxLCJleHAiOjE3NDMxOTA2MjF9.4vmvYqVdVFxNF1pt7s_sahlm8hav1Lm2TEwUBlw4__M
+
+{
+    "model":"Qwen/QwQ-32B",
+    "max_tokens":1024,
+    "temperature":0.9,
+    "stop":null,
+    "top_k":50,
+    "top_p":0.7,
+    "n":1,
+    "response_format": {"type": "text"},
+    "frequency_penalty":0.5,
+    "messages":[
+        {"role":"user","content":"蔡徐坤"} 
+    ]
+}
