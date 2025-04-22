@@ -2,7 +2,18 @@
 const db_conf = require('config').get('dbConfig');
 // 建立数据库连接池
 const mariadb = require('mariadb');
-const pool = new mariadb.createPool(db_conf);
+const pool = new mariadb.createPool({
+    host: db_conf.host,
+    port: db_conf.port,
+    user: db_conf.user,
+    password: db_conf.password,
+    database: db_conf.database,
+    trace: true
+    // logger: {
+    //     query: (msg) => console.log(msg),
+    //     error: (err) => console.log(err)
+    // }
+});
 
 // SQL 组装器 - 仅用于预览 SQL 语句
 const generateSql = (sql, params) => {
@@ -21,9 +32,8 @@ const generateSql = (sql, params) => {
 exports.query = async (sql, sqlParams) => {
     let conn;
     try {
-        conn = await pool.getConnection();
         console.log('Executing SQL query:', generateSql(sql, sqlParams));
-        return await conn.query(sql, sqlParams);
+        return await pool.query(sql, sqlParams);
     } catch (err) {
         return err;
     } finally {

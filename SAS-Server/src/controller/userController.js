@@ -2,17 +2,32 @@ const router = require('express').Router();
 module.exports = router;
 
 const userService = require('../service/userService');
-//获取历史列表
-router.get('/getHistoryList', async (req, res, next) => {
-    const userId = req.query.userId;
-    const result = await userService.getHistoryList(userId);
+
+router.get('/getUserList', async (req, res, next) => {
+    const result = await userService.getUserList();
     res.ResultVO(0, '成功', result);
 });
 
-//获取详细信息
-
 router.get('/getUserInfo', async (req, res, next) => {
-    const { userId } = req.query;
-    const result = await userService.getUserInfo(userId);
+    const { studentId } = req.query;
+    const result = await userService.getUserInfo(studentId);
+    res.ResultVO(0, '成功', result);
+});
+
+router.post('/addUser', async (req, res, next) => {
+    const { studentId, userName, college, grade, major, userClass } = req.body;
+    const result = await userService.addUser(studentId, userName, college, grade, major, userClass);
+    res.ResultVO(0, '成功', result);
+});
+
+router.put('/updateUser', async (req, res, next) => {
+    const { studentId, userName, college, grade, major, userClass } = req.body;
+    const result = await userService.updateUser(studentId, userName, college, grade, major, userClass);
+    res.ResultVO(0, '成功', result);
+});
+
+router.put('/deleteUser', async (req, res, next) => {
+    const { studentId } = req.body;
+    const result = await userService.deleteUser(studentId);
     res.ResultVO(0, '成功', result);
 });
