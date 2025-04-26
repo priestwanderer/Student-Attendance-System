@@ -73,7 +73,6 @@ const request = {
         return request.fetch(url, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'multipart/form-data',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
             body: formData

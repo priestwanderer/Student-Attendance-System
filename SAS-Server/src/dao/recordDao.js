@@ -15,8 +15,7 @@ exports.getRecordList = async () => {
             user.class AS userClass,
             arrangement.id AS arrangementId,
             arrangement.course AS course,
-            arrangement.time AS time,
-            arrangement.admin AS admin
+            arrangement.time AS time
         FROM
             record
         INNER JOIN
@@ -45,8 +44,7 @@ exports.getRecordInfo = async (studentId) => {
             arrangement.id AS arrangementId,
             arrangement.course AS course,
             record.status AS status,
-            arrangement.time AS time,
-            arrangement.admin AS admin
+            arrangement.time AS time
         FROM
             record
         INNER JOIN

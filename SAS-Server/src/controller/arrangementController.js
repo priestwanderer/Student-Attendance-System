@@ -15,14 +15,14 @@ router.get('/getArrangement', async (req, res, next) => {
 });
 
 router.post('/addArrangement', async (req, res, next) => {
-    const { userClass, course, time, whichCourse, classroom, admin } = req.body;
-    const result = await arrangementService.addArrangement(userClass, course, time, whichCourse, classroom, admin);
+    const { userClass, course, time, whichCourse, classroom, adminOne, adminTwo } = req.body;
+    const result = await arrangementService.addArrangement(userClass, course, time, whichCourse, classroom, adminOne, adminTwo);
     res.ResultVO(0, '成功', result);
 });
 
 router.put('/updateArrangement', async (req, res, next) => {
-    const { arrangementId, userClass, course, time, whichCourse, classroom, admin } = req.body;
-    const result = await arrangementService.updateArrangement(arrangementId, userClass, course, time, whichCourse, classroom, admin);
+    const { arrangementId, userClass, course, time, whichCourse, classroom, adminOne, adminTwo } = req.body;
+    const result = await arrangementService.updateArrangement(arrangementId, userClass, course, time, whichCourse, classroom, adminOne, adminTwo);
     res.ResultVO(0, '成功', result);
 });
 

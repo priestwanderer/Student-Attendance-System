@@ -9,7 +9,7 @@ router.get('/getRecordList', async (req, res, next) => {
 });
 
 router.get('/getRecordInfo', async (req, res, next) => {
-    const { studentId } = req.query;
+    const { studentId } = req.payload;
     const result = await recordService.getRecordInfo(studentId);
     res.ResultVO(0, '成功', result);
 });

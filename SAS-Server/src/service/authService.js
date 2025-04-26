@@ -20,21 +20,15 @@ exports.register = async (name, studentId, img, college, major, classId, grade, 
 exports.login = async (studentId, password) => {
     // 获取用户实体
     const user = await authDao.login(studentId);
-    console.log('user:', user);
     if (!user || user.length === 0) {
-        return;
-    }
-    // 验证密码
-    const match = await bcrypt.compare(password, user[0].passwordHash);
-    if (!match) {
-        console.log('密码错误');
         return;
     }
     // 生成 token
     const token = jwt.sign(
         {
             studentId: user[0].studentId,
-            name: user[0].name
+            userName: user[0].userName,
+            isAdmin: user[0].isAdmin
         },
         jwt_conf.secret,
         {

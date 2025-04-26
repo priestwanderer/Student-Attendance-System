@@ -7,12 +7,12 @@ const authService = require('../service/authService');
  * @name login 学生登录
  * @description POST /auth/login
  * @body {string} studentId 用户ID
- * @body {string} password 用户密码
+ * @body {string}  userName 用户名称
  * @response {string} token 登录凭证
  */
 router.post('/login', async (req, res, next) => {
-    const { studentId, password } = req.body;
-    const token = await authService.login(studentId, password);
+    const { studentId, userName } = req.body;
+    const token = await authService.login(studentId, userName);
     if (token) {
         res.ResultVO(0, '登录成功', token);
     } else {

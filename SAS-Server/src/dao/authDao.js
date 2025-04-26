@@ -1,3 +1,4 @@
+const e = require('express');
 const db = require('../utils/dbConnPool/db');
 const { uuidv7 } = require('uuidv7');
 
@@ -19,16 +20,31 @@ exports.register = async (studentId, userName, passwordHash) => {
 exports.login = async (studentId) => {
     const sql = `
         SELECT
-            id AS userId,
             student_id AS studentId,
             name AS userName,
-            password_hash AS passwordHash
-            
+            is_admin AS isAdmin
         FROM
-            user
+            admin
         WHERE
-            student_id = ?
+            student_id = ? AND valid_flag = 1
     `;
     const sqlParams = [studentId];
-    return await db.query(sql, sqlParams);
+    const user = await db.query(sql, sqlParams);
+    if (user.length === 0) {
+        const sql = `
+            SELECT
+                student_id AS studentId,
+                name AS userName
+            FROM
+                user
+            WHERE
+                student_id = ? AND valid_flag = 1
+        `;
+        const sqlParams = [studentId];
+        const user = await db.query(sql, sqlParams);
+        console.log('user:', user);
+        return user;
+    } else {
+        return user;
+    }
 };

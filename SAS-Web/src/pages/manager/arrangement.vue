@@ -4,16 +4,16 @@
         <!-- 考勤安排列表 -->
         <div v-for="(schedule, index) in attendanceSchedules" :key="index"
             class="card bg-base-100 rounded-box shadow-md mb-4">
-            <div class="card-body">
+            <div class="card-body" @click="gotoRota()">
                 <!-- 星期 -->
-                <h2 class="card-title text-2xl text-[#8c9eff]">星期{{ schedule.day }}</h2>
+                <h2 class="card-title text-2xl text-[#8c9eff]">星期{{ schedule.whichDay }}</h2>
                 <!-- 考勤班级 -->
-                <div class="grid grid-cols-2 mb-2">
-                    <div class="text-lg">{{ schedule.college1 }}{{ schedule.grade1 }}{{ schedule.class1 }}</div>
-                    <div class="text-lg">{{ schedule.college2 }}{{ schedule.grade2 }}{{ schedule.class2 }}</div>
+                <div class="w-full flex flex-col mb-2">
+                    <div class="text-lg">{{ schedule.class1 }}</div>
+                    <div class="text-lg">{{ schedule.class2 }}</div>
                 </div>
                 <!-- 考勤信息 -->
-                <div class="grid grid-cols-4 gap-4 p-2 rounded mb-4">
+                <div class="grid grid-cols-4 gap-2 p-1 rounded mb-4">
                     <div class="text-lg">课程</div>
                     <div class="text-lg">时间</div>
                     <div class="text-lg">教室</div>
@@ -22,9 +22,9 @@
                     <div>{{ schedule.course }}</div>
                     <div>{{ schedule.time }}</div>
                     <div>{{ schedule.classroom }}</div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>{{ schedule.admin1 }}</div>
-                        <div>{{ schedule.admin2 }}</div>
+                    <div class="w-full flex flex-col">
+                        <div>{{ schedule.adminOne }}</div>
+                        <div>{{ schedule.adminTwo }}</div>
                     </div>
                 </div>
                 <!-- 操作按钮 -->
@@ -60,100 +60,127 @@
                 <h3 class="font-bold text-lg mb-4">编辑考勤安排</h3>
                 <form class="grid grid-cols-3 gap-4">
                     <div class="form-control">
-                        <label class="label">学院一</label>
-                        <select v-model="currentSchedule.college1" class="select select-bordered w-full">
-                            <option disabled selected>选择学院</option>
-                            <option value="2">第二临床医学院</option>
-                            <option value="3">医学技术学院</option>
-                            <option value="4">护理学院</option>
-                            <option value="5">公共卫生学院</option>
-                            <option value="6">药学院</option>
-                            <option value="7">人文与管理学院</option>
-                            <option value="8">基础医学院</option>
-                            <option value="9">生物医学工程学院</option>
-                            <option value="11">外国语学院</option>
-                        </select>
-                    </div>
-                    <div class="form-control">
                         <label class="label">年级一</label>
                         <select v-model="currentSchedule.grade1" class="select select-bordered w-full">
                             <option disabled selected>选择年级</option>
-                            <option value="2021">2021级</option>
-                            <option value="2022">2022级</option>
-                            <option value="2023">2023级</option>
-                            <option value="2024">2024级</option>
+                            <option value="22">2022级</option>
+                            <option value="23">2023级</option>
+                            <option value="24">2024级</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">学院一</label>
+                        <select v-model="currentSchedule.college1" class="select select-bordered w-full">
+                            <option disabled selected>选择学院</option>
+                            <option value="02">第二临床医学院</option>
+                            <option value="03">医学技术学院</option>
+                            <option value="04">护理学院</option>
+                            <option value="05">公共卫生学院</option>
+                            <option value="06">药学院</option>
+                            <option value="07">人文与管理学院</option>
+                            <option value="08">基础医学院</option>
+                            <option value="09">生物医学工程学院</option>
+                            <option value="11">外国语学院</option>
                         </select>
                     </div>
                     <div class="form-control">
                         <label class="label">班级一</label>
                         <select v-model="currentSchedule.class1" class="select select-bordered w-full">
                             <option disabled selected>选择班级</option>
-                            <option value="1">1班</option>
-                            <option value="2">2班</option>
-                            <option value="3">3班</option>
-                            <option value="4">4班</option>
-                        </select>
-                    </div>
-                    <div class="form-control">
-                        <label class="label">学院二</label>
-                        <select v-model="currentSchedule.college2" class="select select-bordered w-full">
-                            <option disabled selected>选择学院</option>
-                            <option value="2">第二临床医学院</option>
-                            <option value="3">医学技术学院</option>
-                            <option value="4">护理学院</option>
-                            <option value="5">公共卫生学院</option>
-                            <option value="6">药学院</option>
-                            <option value="7">人文与管理学院</option>
-                            <option value="8">基础医学院</option>
-                            <option value="9">生物医学工程学院</option>
-                            <option value="11">外国语学院</option>
+                            <option value="01">1班</option>
+                            <option value="02">2班</option>
+                            <option value="03">3班</option>
+                            <option value="04">4班</option>
+                            <option value="05">5班</option>
+                            <option value="06">6班</option>
+                            <option value="07">7班</option>
+                            <option value="08">8班</option>
+                            <option value="09">9班</option>
+                            <option value="10">10班</option>
+                            <option value="11">11班</option>
+                            <option value="12">12班</option>
+                            <option value="13">13班</option>
+                            <option value="14">14班</option>
+                            <option value="15">15班</option>
+                            <option value="16">16班</option>
+                            <option value="17">17班</option>
+                            <option value="18">18班</option>
                         </select>
                     </div>
                     <div class="form-control">
                         <label class="label">年级二</label>
                         <select v-model="currentSchedule.grade2" class="select select-bordered w-full">
                             <option disabled selected>选择年级</option>
-                            <option value="2021">2021级</option>
-                            <option value="2022">2022级</option>
-                            <option value="2023">2023级</option>
-                            <option value="2024">2024级</option>
+                            <option value="22">2022级</option>
+                            <option value="23">2023级</option>
+                            <option value="24">2024级</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">学院二</label>
+                        <select v-model="currentSchedule.college2" class="select select-bordered w-full">
+                            <option disabled selected>选择学院</option>
+                            <option value="02">第二临床医学院</option>
+                            <option value="03">医学技术学院</option>
+                            <option value="04">护理学院</option>
+                            <option value="05">公共卫生学院</option>
+                            <option value="06">药学院</option>
+                            <option value="07">人文与管理学院</option>
+                            <option value="08">基础医学院</option>
+                            <option value="09">生物医学工程学院</option>
+                            <option value="11">外国语学院</option>
                         </select>
                     </div>
                     <div class="form-control">
                         <label class="label">班级二</label>
                         <select v-model="currentSchedule.class2" class="select select-bordered w-full">
                             <option disabled selected>选择班级</option>
-                            <option value="1">1班</option>
-                            <option value="2">2班</option>
-                            <option value="3">3班</option>
-                            <option value="4">4班</option>
+                            <option value="01">1班</option>
+                            <option value="02">2班</option>
+                            <option value="03">3班</option>
+                            <option value="04">4班</option>
+                            <option value="05">5班</option>
+                            <option value="06">6班</option>
+                            <option value="07">7班</option>
+                            <option value="08">8班</option>
+                            <option value="09">9班</option>
+                            <option value="10">10班</option>
+                            <option value="11">11班</option>
+                            <option value="12">12班</option>
+                            <option value="13">13班</option>
+                            <option value="14">14班</option>
+                            <option value="15">15班</option>
+                            <option value="16">16班</option>
+                            <option value="17">17班</option>
+                            <option value="18">18班</option>
                         </select>
                     </div>
                 </form>
-                <form class="grid grid-cols-2 gap-4">
-                    <!-- 星期 -->
+                <form class="grid grid-cols-2 gap-2">
+                    <!-- 第几节课下课 -->
                     <div class="form-control">
-                        <label class="label">星期</label>
-                        <select v-model="currentSchedule.day" class="select input input-bordered w-full">
-                            <option value="一">一</option>
-                            <option value="二">二</option>
-                            <option value="三">三</option>
-                            <option value="四">四</option>
-                            <option value="五">五</option>
-                            <option value="六">六</option>
-                            <option value="日">日</option>
+                        <label class="label">第几节</label>
+                        <select v-model="currentSchedule.whichCourse" class="select input input-bordered w-full">
+                            <option value="1">一</option>
+                            <option value="2">二</option>
+                            <option value="3">三</option>
+                            <option value="4">四</option>
+                            <option value="5">五</option>
+                            <option value="6">六</option>
+                            <option value="7">七</option>
+                            <option value="8">八</option>
                         </select>
-                    </div>
-                    <!-- 课程 -->
-                    <div class="form-control">
-                        <label class="label">课程</label>
-                        <input type="text" v-model="currentSchedule.course" placeholder="课程名称"
-                            class="input input-bordered w-full">
                     </div>
                     <!-- 时间 -->
                     <div class="form-control">
                         <label class="label">时间</label>
                         <input type="text" v-model="currentSchedule.time" placeholder="时间点"
+                            class="input input-bordered w-full">
+                    </div>
+                    <!-- 课程 -->
+                    <div class="form-control">
+                        <label class="label">课程</label>
+                        <input type="text" v-model="currentSchedule.course" placeholder="课程名称"
                             class="input input-bordered w-full">
                     </div>
                     <!-- 教室 -->
@@ -165,13 +192,13 @@
                     <!-- 考勤员1 -->
                     <div class="form-control">
                         <label class="label">考勤员1</label>
-                        <input type="text" v-model="currentSchedule.admin1" placeholder="考勤员1"
+                        <input type="text" v-model="currentSchedule.adminOne" placeholder="考勤员1"
                             class="input input-bordered w-full">
                     </div>
                     <!-- 考勤员2 -->
                     <div class="form-control">
                         <label class="label">考勤员2</label>
-                        <input type="text" v-model="currentSchedule.admin2" placeholder="考勤员2"
+                        <input type="text" v-model="currentSchedule.adminTwo" placeholder="考勤员2"
                             class="input input-bordered w-full">
                     </div>
                 </form>
@@ -195,50 +222,155 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
+import kaoqinClass from '@/utils/kaoqinClass';
 export default {
     name: 'AttendanceScheduler',
+    components: {},
+    computed: {},
+    created() {
+        // 获取考勤安排列表
+        this.getArrangementList();
+    },
     data() {
         return {
-            attendanceSchedules: [
-                {
-                    class1: "24信管1班",
-                    class2: "24信管2班",
-                    day: "一",
-                    course: "数学分析",
-                    time: "上午第四节下课",
-                    classroom: "A3-2",
-                    admin1: "龙",
-                    admin2: "刘"
-                }
-            ],
-            currentSchedule: {
-                day: "一",
-                course: "数学分析",
-                time: "上午第四节下课",
-                classroom: "A3-2",
-                admin1: "龙",
-                admin2: "刘"
-            },
+            attendanceSchedules: [], // 
+            currentSchedule: {},
             currentIndex: -1,
             isAdding: false,
             isConfirm: false,
-            deleteIndex: -1
+            deleteIndex: -1,
+            filterClass: '',
+            filteredSchedules: [],
+            UserClass: [], // 用户班级信息
+            isAdd: false // 是否是新增
         };
     },
     methods: {
+        // 获取考勤安排列表
+        async getArrangementList() {
+            const response = await this.$api.arrangement.getArrangementList();
+            this.attendanceSchedules = response;
+            this.attendanceSchedules = this.attendanceSchedules.map(item => {
+                const classes = item.userClass.split(',');
+                const classOneObj = new kaoqinClass(classes[0]);
+                const classTwoObj = new kaoqinClass(classes[1]);
+                const class1 = classOneObj.className;
+                const class2 = classTwoObj.className;
+                return {
+                    ...item,
+                    class1: class1,
+                    class2: class2
+                };
+            });
+            this.attendanceSchedules.map(item => {
+                if (item.whichCourse == 1) {
+                    item.whichCourse = '一';
+                } else if (item.whichCourse == 2) {
+                    item.whichCourse = '二';
+                } else if (item.whichCourse == 3) {
+                    item.whichCourse = '三';
+                } else if (item.whichCourse == 4) {
+                    item.whichCourse = '四';
+                } else if (item.whichCourse == 5) {
+                    item.whichCourse = '五';
+                } else if (item.whichCourse == 6) {
+                    item.whichCourse = '六';
+                } else if (item.whichCourse == 7) {
+                    item.whichCourse = '七';
+                } else if (item.whichCourse == 8) {
+                    item.whichCourse = '八';
+                }
+            });
+            this.attendanceSchedules.map(item => {
+                if (item.whichDay == 1) {
+                    item.whichDay = '一';
+                } else if (item.whichDay == 2) {
+                    item.whichDay = '二';
+                } else if (item.whichDay == 3) {
+                    item.whichDay = '三';
+                } else if (item.whichDay == 4) {
+                    item.whichDay = '四';
+                } else if (item.whichDay == 5) {
+                    item.whichDay = '五';
+                }
+            });
+            // 格式化时间和班级编码
+            this.attendanceSchedules.forEach(schedule => {
+                if (schedule.time) {
+                    schedule.time = this.formatDate(schedule.time, 'YYYY-MM-DD');
+                }
+            });
+        },
+        // 格式化日期
+        formatDate(timestamp, format = 'YYYY-MM-DD') {
+            if (!timestamp) return '';
+            return dayjs(timestamp).format(format);
+        },
+        // 新增考勤安排
+        async addArrangement() {
+            const response = await this.$api.arrangement.addArrangement({
+                userClass: `${this.currentSchedule.grade1}2${this.currentSchedule.college1}${this.currentSchedule.class1},${this.currentSchedule.grade2}2${this.currentSchedule.college2}${this.currentSchedule.class2}`,
+                course: this.currentSchedule.course,
+                time: this.currentSchedule.time,
+                whichCourse: this.currentSchedule.whichCourse,
+                classroom: this.currentSchedule.classroom,
+                adminOne: this.currentSchedule.adminOne,
+                adminTwo: this.currentSchedule.adminTwo,
+            });
+            this.currentSchedule = response;
+            this.getArrangementList();
+        },
+        // 修改考勤安排
+        async updateArrangement() {
+            const response = await this.$api.arrangement.updateArrangement(this.currentSchedule);
+            if (response.success) {
+                // 转换班级编码
+                if (this.currentSchedule.class1) {
+                    const classInfo1 = new kaoqinClass(this.currentSchedule.class1);
+                    this.currentSchedule.class1 = classInfo1.getClassName();
+                }
+                if (this.currentSchedule.class2) {
+                    const classInfo2 = new kaoqinClass(this.currentSchedule.class2);
+                    this.currentSchedule.class2 = classInfo2.getClassName();
+                }
+                this.attendanceSchedules[this.currentIndex] = this.currentSchedule;
+                this.currentSchedule = {};
+            }
+        },
+        // 删除考勤安排
+        async deleteArrangement() {
+            const response = await this.$api.arrangement.deleteArrangement({
+                arrangementId: this.attendanceSchedules[this.deleteIndex].arrangementId
+
+            });
+            if (response.success) {
+                this.attendanceSchedules.splice(this.deleteIndex, 1);
+                this.deleteIndex = -1;
+            }
+        },
         // 打开编辑对话框
         openEditDialog(index) {
             this.currentIndex = index;
             this.currentSchedule = { ...this.attendanceSchedules[index] };
             this.isAdding = false;
             document.getElementById('editDialog').showModal();
+            this.isAdd = false;
         },
-
+        // 应用班级筛选
+        applyFilter() {
+            if (this.filterClass) {
+                this.filteredSchedules = this.attendanceSchedules.filter(schedule =>
+                    schedule.class1.includes(this.filterClass) || schedule.class2.includes(this.filterClass)
+                );
+            } else {
+                this.filteredSchedules = [...this.attendanceSchedules];
+            }
+        },
         // 关闭编辑对话框
         closeEditDialog() {
             document.getElementById('editDialog').close();
         },
-
         // 保存考勤安排
         saveSchedule() {
             if (this.currentIndex !== -1) {
@@ -249,43 +381,41 @@ export default {
             this.closeEditDialog();
             this.currentIndex = -1;
             this.isAdding = false;
+            if (this.isAdd) {
+                this.addArrangement();
+            }else if (this.isAdd === false) {
+                this.updateArrangement();
+            }
         },
-
         // 打开删除对话框
         openDeleteDialog(index) {
             this.deleteIndex = index;
             this.isConfirm = true;
         },
-
         // 处理删除确认
         handleDeleteConfirm() {
             if (this.deleteIndex !== -1) {
-                this.attendanceSchedules.splice(this.deleteIndex, 1);
-                this.deleteIndex = -1;
+                this.deleteArrangement();
                 this.isConfirm = false;
             }
         },
-
         // 处理删除取消
         handleDeleteCancel() {
             this.deleteIndex = -1;
             this.isConfirm = false;
         },
-
         // 打开新增对话框
         openAddDialog() {
-            this.currentSchedule = {
-                class1: "",
-                class2: "",
-                day: "",
-                course: "",
-                time: "",
-                classroom: "",
-                admin1: "",
-                admin2: ""
-            };
+            this.currentSchedule = {};
             this.isAdding = true;
             document.getElementById('editDialog').showModal();
+            this.isAdd = true;
+        },
+        // 跳转到考勤安排详情
+        gotoRota() {
+            this.$store.arrangement.userClass = this.attendanceSchedules[this.currentIndex].userClass;
+            this.$store.arrangement.arrangementId = this.attendanceSchedules[this.currentIndex].arrangementId;
+            this.$router.push({ path: '/manager/choose' });
         }
     }
 };

@@ -40,7 +40,7 @@
                     </li>
                     <li
                         class="mb-5 w-full">
-                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goUpload">上传</a>
+                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goLogin">退出</a>
                     </li>
                 </ul>
             </div>
@@ -72,9 +72,9 @@ export default {
         goRecord() {
             this.$router.push({ path: '/head/record' });
         },
-        goUpload() {
-            this.$router.push({ path: '/head/upload' });
-        },
+        goLogin() {
+            this.$router.push({ path: '/login' });
+        }
     }, // 定义组件的方法
 };
 </script>

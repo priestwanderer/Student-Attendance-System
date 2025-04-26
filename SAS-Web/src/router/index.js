@@ -4,14 +4,32 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/head/rota'
+        redirect: '/login'
     },
     {
-        path: '/demo',
-        name: 'demo',
-        component: () => import('@/pages/demo/demo.vue'),
+        path: '/login',
+        name: 'login',
+        component: () => import('@/pages/user/login.vue'),
         meta: {
-            title: '示例页面',
+            title: '登录',
+            freeAuth: true
+        }
+    },
+    {
+        path: '/select',
+        name: 'select',
+        component: () => import('@/pages/user/select.vue'),
+        meta: {
+            title: '选择端',
+            freeAuth: true
+        }
+    },
+    {
+        path: '/student',
+        name: 'student',
+        component: () => import('@/pages/user/student.vue'),
+        meta: {
+            title: '学生端',
             freeAuth: true
         }
     },
@@ -61,15 +79,6 @@ const routes = [
                         }
                     }
                 ]
-            },
-            {
-                path: 'upload',
-                name: 'upload',
-                component: () => import('@/pages/user/upload.vue'),
-                meta: {
-                    title: '上传',
-                    freeAuth: true
-                }
             }
         ],
     }

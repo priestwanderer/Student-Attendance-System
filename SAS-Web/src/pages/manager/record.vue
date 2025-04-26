@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
+import UserClass from '../../utils/UserClass';
 export default {
     name: 'RecordPage',
     components: {}, // 用于注册子组件的地方
@@ -43,8 +45,22 @@ export default {
         // 获取考勤记录列表
         async getRecordList() {
             const response = await this.$api.record.getRecordList();
-            this.records = response;
-        }
+            this.records = response.map(record => {
+                const college = UserClass.getCollege(record.college);
+                return {
+                    ...record,
+                    college: college // 将学院编码转换为学院名称
+                };
+            });
+            this.records.forEach(record => {
+                record.time = this.formatDate(record.time, 'YYYY-MM-DD');
+            });
+        },
+        // 格式化日期
+        formatDate(timestamp, format = 'YYYY-MM-DD') {
+            if (!timestamp) return '';
+            return dayjs(timestamp).format(format);
+        },
     },
 };
 </script>
