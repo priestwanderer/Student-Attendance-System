@@ -1,36 +1,41 @@
 <template>
-    <!-- 花名册内容 -->
-    <div v-if="PerfectAttendance" role="alert" class="alert alert-success fixed left-1/2 -translate-x-1/2 z-50">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-lg">班级全勤，无需导出名单。</span>
-    </div>
-    <div class="w-full text-xl grid grid-cols-3 gap-4 my-5 px-3">
-        <div v-for="(item, index) in items" :key="index" class="flex flex-col justify-center items-center">
-            <!-- 学生证件照 -->
-            <div class="flex justify-center items-center">
-                <img :src="item.image" class="w-full h-full" />
-            </div>
-            <!-- 学生姓名 -->
-            <div class="mt-1">
-                <p>{{ item.name }}</p>
-            </div>
-            <!-- 学生学号 -->
-            <div class="text-lg">
-                <p>{{ item.id }}</p>
-            </div>
-            <div class="flex flex-row gap-1">
-                <button class="btn btn-s btn-outline px-2" :class="item.status === 'absent' ? 'btn-error' : 'btn-outline'"
-                    @click="markStatus(index, 'absent')">缺勤</button>
-                <button class="btn btn-s btn-outline px-2" :class="item.status === 'leave' ? 'btn-info' : 'btn-outline'"
-                    @click="markStatus(index, 'leave')">请假</button>
+    <!-- 考勤页导航栏（筛选学院、年级、班级） -->
+    <div>
+        <!-- 全勤提醒弹窗 -->
+        <div v-if="PerfectAttendance" role="alert" class="alert alert-success fixed left-1/2 -translate-x-1/2 z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-lg">班级全勤，无需导出名单。</span>
+        </div>
+        <!-- 花名册内容 -->
+        <div class="w-full text-xl grid grid-cols-3 gap-4 my-5 px-3">
+            <div v-for="(item, index) in items" :key="index" class="flex flex-col justify-center items-center">
+                <!-- 学生证件照 -->
+                <div class="flex justify-center items-center">
+                    <img :src="item.image" class="w-full h-full" />
+                </div>
+                <!-- 学生姓名 -->
+                <div class="mt-1">
+                    <p>{{ item.name }}</p>
+                </div>
+                <!-- 到课状态 -->
+                <div class="flex flex-row gap-1 mt-1">
+                    <button class="btn btn-s btn-outline px-2"
+                        :class="item.status === 'absent' ? 'btn-error' : 'btn-outline'"
+                        @click="markStatus(index, 'absent')">缺勤</button>
+                    <button class="btn btn-s btn-outline px-2"
+                        :class="item.status === 'leave' ? 'btn-info' : 'btn-outline'"
+                        @click="markStatus(index, 'leave')">请假</button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="pb-10 flex justify-center items-center">
-        <button class="btn btn-outline btn-primary btn-wide" @click="exportToExcel">导出考勤结果</button>
+        <div class="w-full pb-10 flex justify-between px-13">
+            <button class="w-[35dvw] btn btn-outline btn-primary btn-wide">保存考勤记录</button>
+            <button class="w-[35dvw] btn btn-outline btn-primary btn-wide" @click="exportToExcel">导出考勤结果</button>
+        </div>
     </div>
 </template>
 

@@ -20,6 +20,11 @@ exports.updateUser = async (studentId, userName, college, grade, major, userClas
     return result;
 };
 
+exports.uploadImg = async (img, studentId) => {
+    const result = await userDao.uploadImg(img, studentId);
+    return result;
+};
+
 exports.deleteUser = async (studentId) => {
     const result = await userDao.deleteUser(studentId);
     return result;
