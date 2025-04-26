@@ -63,6 +63,7 @@
         "express": "^4.19.2",
         "jsonwebtoken": "^9.0.2",
         "mariadb": "^3.3.0",
+        "multer": "^1.4.5-lts.2",
         "nodejs-express-demo": "file:",
         "uuid": "^11.0.3",
         "uuidv7": "^1.0.2"

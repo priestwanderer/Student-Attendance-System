@@ -4,12 +4,12 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/rota'
+        redirect: '/head/rota'
     },
     {
         path: '/demo',
         name: 'demo',
-        component: () => import('../pages/demo/demo.vue'),
+        component: () => import('@/pages/demo/demo.vue'),
         meta: {
             title: '示例页面',
             freeAuth: true
@@ -18,18 +18,56 @@ const routes = [
     {
         path: '/head',
         name: 'head',
-        component: () => import('../pages/user/head.vue'),
+        component: () => import('@/pages/user/head.vue'),
         meta: {
             title: '导航栏',
             freeAuth: true
         },
         children: [
             {
-                path: '/rota',
-                name: 'rota',
-                component: () => import('../pages/user/rota.vue'),
+                path: 'arrangement',
+                name: 'arrangement',
+                component: () => import('@/pages/manager/arrangement.vue'),
                 meta: {
-                    title: '花名册',
+                    title: '安排',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'rota',
+                name: 'rota',
+                component: () => import('@/pages/manager/rota.vue'),
+                meta: {
+                    title: '考勤',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'record',
+                name: 'record',
+                component: () => import('@/pages/manager/record.vue'),
+                meta: {
+                    title: '记录',
+                    freeAuth: true
+                },
+                children: [
+                    {
+                        path: 'recordDetail',
+                        name : 'recordDetail',
+                        component: () => import('@/pages/manager/recordDetail.vue'),
+                        meta: {
+                            title: '记录详情',
+                            freeAuth: true
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'upload',
+                name: 'upload',
+                component: () => import('@/pages/user/upload.vue'),
+                meta: {
+                    title: '上传',
                     freeAuth: true
                 }
             }

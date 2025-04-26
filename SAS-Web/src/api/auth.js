@@ -1,4 +1,4 @@
-import authentication from '@/utils/authentication';
+import authentication from '../utils/authentication';
 
 const auth = {
     // 用户登录

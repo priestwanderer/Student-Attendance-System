@@ -1,11 +1,9 @@
 const db = require(`../utils/dbConnPool/db`);
-const { uuidv7 } = require('uuidv7');
 
 // 获取所有student列表
 exports.getUserList = async () => {
     const sql = `
         SELECT
-            id AS userId,
             student_id AS studentId,
             name AS userName,
             college AS college,
@@ -22,7 +20,6 @@ exports.getUserList = async () => {
 exports.getUserInfo = async (studentId) => {
     const sql = `
         SELECT
-            id AS userId,
             student_id AS studentId,
             name AS userName,
             college AS college,
@@ -43,7 +40,7 @@ exports.addUser = async (studentId, userName, college, grade, major, userClass) 
     const sql = `
         INSERT INTO user
         (student_id, name, college, grade, major, class, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, now())
+        VALUES (?, ?, ?, ?, ?, ?, NOW())
     `;
     const sqlParams = [studentId, userName, college, grade, major, userClass];
     return await db.query(sql, sqlParams);
@@ -57,6 +54,17 @@ exports.updateUser = async (studentId, userName, college, grade, major, userClas
         WHERE student_id = ?
     `;
     const sqlParams = [userName, college, grade, major, userClass, studentId];
+    return await db.query(sql, sqlParams);
+};
+
+// 上传图片
+exports.uploadImg = async (img, studentId) => {
+    const sql = `
+        UPDATE user
+        SET img = ?
+        WHERE student_id = ?
+    `;
+    const sqlParams = [img, studentId];
     return await db.query(sql, sqlParams);
 };
 

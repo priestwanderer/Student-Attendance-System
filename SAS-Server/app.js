@@ -26,9 +26,16 @@ const server_conf = require('config').get('serverConfig');
 const baseUrl = server_conf.baseUrl || '/api';
 app.use(`${baseUrl}/auth`, require('./src/controller/authController'));
 app.use(`${baseUrl}/user`, require('./src/controller/userController'));
+app.use(`${baseUrl}/record`, require('./src/controller/recordController'));
+app.use(`${baseUrl}/arrangement`, require('./src/controller/arrangementController'));
 
 // 启动服务器
 const server = app.listen(server_conf.port || 33001, server_conf.host || '127.0.0.1', () => {
     console.log('Server running at http://%s:%s', server_conf.host, server_conf.port);
     console.log('Environment=%s', process.env.NODE_ENV);
 });
+
+// 暴露图片静态访问路径
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
