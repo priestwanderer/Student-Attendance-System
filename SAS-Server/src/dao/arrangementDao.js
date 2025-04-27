@@ -9,9 +9,10 @@ exports.getArrangementList = async () => {
             arrangement.class AS userClass,
             arrangement.course AS course,
             arrangement.time AS time,
+            a.name AS adminOne,
+            b.name AS adminTwo,
             arrangement.which_course AS whichCourse,
             arrangement.classroom AS classroom,
-            arrangement.admin AS admin,
             school_calendar.academic_year AS academicYear,
             school_calendar.semester AS semester,
             school_calendar.which_week AS whichWeek,
@@ -21,6 +22,10 @@ exports.getArrangementList = async () => {
             arrangement
         INNER JOIN
             school_calendar ON arrangement.time = school_calendar.date
+        INNER JOIN
+            admin a ON arrangement.adminOne = a.student_id
+        INNER JOIN
+            admin b ON arrangement.adminTwo = b.student_id
         WHERE
             arrangement.valid_flag = 1
     `;
@@ -37,7 +42,6 @@ exports.getArrangement = async (whichWeek) => {
         arrangement.time AS time,
         arrangement.which_course AS whichCourse,
         arrangement.classroom AS classroom,
-        arrangement.admin AS admin,
         school_calendar.academic_year AS academicYear,
         school_calendar.semester AS semester,
         school_calendar.which_week AS whichWeek,
@@ -55,17 +59,17 @@ exports.getArrangement = async (whichWeek) => {
 };
 
 // 新增考勤安排
-exports.addArrangement = async (userClass, course, time, whichCourse, classroom, admin) => {
+exports.addArrangement = async (userClass, course, time, whichCourse, classroom, adminOne, adminTwo) => {
     const sql = `
-        INSERT INTO arrangement (id, class, course, time, which_course, classroom, admin)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO arrangement (id, class, course, time, which_course, classroom, adminOne, adminTwo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
-    const sqlParams = [uuidv7(), userClass, course, time, whichCourse, classroom, admin];
+    const sqlParams = [uuidv7(), userClass, course, time, whichCourse, classroom, adminOne, adminTwo];
     return await db.query(sql, sqlParams);
 };
 
 // 修改考勤安排
-exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom, admin) => {
+exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom) => {
     const sql = `
         UPDATE 
             arrangement
@@ -74,12 +78,11 @@ exports.updateArrangement = async (arrangementId, userClass, course, time, which
             course = ?, 
             time = ?, 
             which_course = ?, 
-            classroom = ?, 
-            admin = ?
+            classroom = ?
         WHERE 
             id = ?
     `;
-    const sqlParams = [userClass, course, time, whichCourse, classroom, admin, arrangementId];
+    const sqlParams = [userClass, course, time, whichCourse, classroom, arrangementId];
     return await db.query(sql, sqlParams);
 };
 

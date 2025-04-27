@@ -27,7 +27,7 @@
         "url": "git+https://github.com/gdmuna/vue-demo.git"
     },
     "engines": {
-        "node": "^22.0.0"
+        "node": "^20.18.1"
     },
     "type": "module",
     "scripts": {
@@ -65,7 +65,9 @@
         "@fortawesome/free-solid-svg-icons": "^6.7.2",
         "@fortawesome/vue-fontawesome": "^3.0.8",
         "@tailwindcss/vite": "^4.0.15",
+        "dayjs": "^1.11.13",
         "file-saver": "^2.0.5",
+        "jwt-decode": "^4.0.0",
         "pinia": "^3.0.1",
         "tailwindcss": "^4.0.15",
         "uuid": "^11.1.0",

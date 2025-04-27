@@ -10,13 +10,13 @@ exports.getArrangement = async (whichWeek) => {
     return arrangementInfo;
 };
 
-exports.addArrangement = async (userClass, course, time, whichCourse, classroom, admin) => {
-    const result = await arrangementDao.addArrangement(userClass, course, time, whichCourse, classroom, admin);
+exports.addArrangement = async (userClass, course, time, whichCourse, classroom, adminOne, adminTwo) => {
+    const result = await arrangementDao.addArrangement(userClass, course, time, whichCourse, classroom, adminOne, adminTwo);
     return result;
 };
 
-exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom, admin) => {
-    const result = await arrangementDao.updateArrangement(arrangementId, userClass, course, time, whichCourse, classroom, admin);
+exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom, adminOne, adminTwo) => {
+    const result = await arrangementDao.updateArrangement(arrangementId, userClass, course, time, whichCourse, classroom, adminOne, adminTwo);
     return result;
 };
 

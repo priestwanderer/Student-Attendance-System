@@ -8,6 +8,7 @@ exports.getUserList = async () => {
             name AS userName,
             college AS college,
             grade AS grade,
+            img AS img,
             major AS major,
             class AS userClass
         FROM
@@ -25,6 +26,7 @@ exports.getUserInfo = async (studentId) => {
             college AS college,
             grade AS grade,
             major AS major,
+            img AS img,
             class AS userClass
         FROM
             user
@@ -57,7 +59,6 @@ exports.updateUser = async (studentId, userName, college, grade, major, userClas
     return await db.query(sql, sqlParams);
 };
 
-// 上传图片
 exports.uploadImg = async (img, studentId) => {
     const sql = `
         UPDATE user
@@ -65,9 +66,9 @@ exports.uploadImg = async (img, studentId) => {
         WHERE student_id = ?
     `;
     const sqlParams = [img, studentId];
-    return await db.query(sql, sqlParams);
+    await db.query(sql, sqlParams);
+    return img;
 };
-
 // 删除student
 exports.deleteUser = async (studentId) => {
     const sql = `

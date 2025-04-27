@@ -4,14 +4,46 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/head/rota'
+        redirect: '/login'
     },
     {
-        path: '/demo',
-        name: 'demo',
-        component: () => import('@/pages/demo/demo.vue'),
+        path: '/login',
+        name: 'login',
+        component: () => import('@/pages/user/login.vue'),
         meta: {
-            title: '示例页面',
+            title: '登录',
+            freeAuth: true
+        }
+    },
+    {
+        path: '/select',
+        name: 'select',
+        component: () => import('@/pages/user/select.vue'),
+        meta: {
+            title: '选择端',
+            freeAuth: true
+        }
+    },
+    {
+        path: '/student',
+        name: 'student',
+        component: () => import('@/pages/user/student.vue'),
+        meta: {
+            title: '学生端',
+            freeAuth: true
+        }
+    },
+    {
+        path: '/choose',
+        name: 'choose',
+        component: () => import('@/pages/manager/choose.vue')
+    },
+    {
+        path: '/classSelect',
+        name: 'classSelect',
+        component: () => import('@/pages/manager/classSelect.vue'),
+        meta: {
+            title: '班级选择',
             freeAuth: true
         }
     },
@@ -43,6 +75,24 @@ const routes = [
                 }
             },
             {
+                path: 'classSelect',
+                name: 'classSelect',
+                component: () => import('@/pages/manager/classSelect.vue'),
+                meta: {
+                    title: '班级选择',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'classRate/:classNumber',
+                name: 'classRate',
+                component: () => import('@/pages/manager/classRate.vue'),
+                meta: {
+                    title: '班级考勤',
+                    freeAuth: true
+                }
+            },
+            {
                 path: 'record',
                 name: 'record',
                 component: () => import('@/pages/manager/record.vue'),
@@ -61,15 +111,6 @@ const routes = [
                         }
                     }
                 ]
-            },
-            {
-                path: 'upload',
-                name: 'upload',
-                component: () => import('@/pages/user/upload.vue'),
-                meta: {
-                    title: '上传',
-                    freeAuth: true
-                }
             }
         ],
     }

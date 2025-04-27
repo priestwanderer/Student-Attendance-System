@@ -21,7 +21,7 @@ const user = {
     },
     //上传用户照片
     uploadImg(data) {
-        return request.put(`${moduleUrl}/uploadImg`, data);
+        return request.upload(`${moduleUrl}/uploadImg`, data);
     },
     // 删除用户信息
     deleteUser(data) {

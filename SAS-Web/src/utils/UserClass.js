@@ -1,5 +1,5 @@
 // UserClass 用户班级工具类
-class UserClass {
+const UserClass = {
     // 班级编码构成 - 第1-2位年级 第3位校区 第4-5位学院 第6-7位班级
     constructor(classId) {
         this.classId = classId;
@@ -8,7 +8,7 @@ class UserClass {
         this.college = this.getCollege(classId);
         this.classNumber = this.getClassNumber(classId);
         this.className = this.getClassName(classId);
-    }
+    },
 
     /**
      * 获取班级编码对应的年级
@@ -18,8 +18,7 @@ class UserClass {
     getGrade(classId) {
         // 年级编码为班级编码的前两位
         return `20${classId.substring(0, 2)}`;
-    }
-
+    },
     /**
      * 获取班级编码对应的校区
      * @param {string} classId - 班级编码
@@ -32,7 +31,7 @@ class UserClass {
             2: '东莞校区'
         };
         return campusMap[classId.charAt(2)] || '未知校区';
-    }
+    },
 
     /**
      * 获取班级编码对应的学院
@@ -42,19 +41,19 @@ class UserClass {
     getCollege(classId) {
         // 学院编码为班级编码的第四、五位
         const collegeMap = {
-            '01': '第一临床医学院',
-            '02': '第二临床医学院',
-            '03': '医学技术学院',
-            '04': '护理学院',
-            '05': '公共卫生学院',
-            '06': '药学院',
-            '07': '人文与管理学院',
-            '08': '基础医学院',
-            '09': '生物医学工程学院',
-            '11': '外国语学院'
+            1: '第一临床医学院',
+            2: '第二临床医学院',
+            3: '医学技术学院',
+            4: '护理学院',
+            5: '公共卫生学院',
+            6: '药学院',
+            7: '人文与管理学院',
+            8: '基础医学院',
+            9: '生物医学工程学院',
+            11: '外国语学院'
         };
-        return collegeMap[classId.substring(3, 5)] || '未知学院';
-    }
+        return collegeMap[classId] || '未知学院';
+    },
 
     /**
      * 获取班级编码对应的班级号
@@ -64,7 +63,7 @@ class UserClass {
     getClassNumber(classId) {
         // 班级号编码为班级编码的第六、七位
         return Number(classId.substring(5, 7));
-    }
+    },
 
     /**
      * 获取班级编码对应的班级名称
@@ -78,6 +77,6 @@ class UserClass {
         const classNumber = this.getClassNumber(classId);
         return `${grade}级${college}${classNumber}班`;
     }
-}
+};
 
-module.exports = UserClass;
+export default UserClass;
