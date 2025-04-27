@@ -10,8 +10,8 @@ exports.getRecordInfo = async (studentId) => {
     return recordInfo;
 };
 
-exports.addRecord = async (arrangementId, studentId, status, time) => {
-    const result = await recordDao.addRecord(arrangementId, studentId, status, time);
+exports.addRecord = async (arrangementId, data) => {
+    const result = await recordDao.addRecord(arrangementId, data);
     return result;
 };
 

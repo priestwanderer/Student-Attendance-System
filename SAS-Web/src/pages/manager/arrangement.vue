@@ -4,7 +4,7 @@
         <!-- 考勤安排列表 -->
         <div v-for="(schedule, index) in attendanceSchedules" :key="index"
             class="card bg-base-100 rounded-box shadow-md mb-4">
-            <div class="card-body" @click="gotoRota()">
+            <div class="card-body">
                 <!-- 星期 -->
                 <h2 class="card-title text-2xl text-[#8c9eff]">星期{{ schedule.whichDay }}</h2>
                 <!-- 考勤班级 -->
@@ -29,6 +29,14 @@
                 </div>
                 <!-- 操作按钮 -->
                 <div class="card-actions justify-end">
+                    <button class="btn btn-outline btn-info mr-2"  @click="gotoRota(index)">
+                        <svg t="1745704813459" class="icon w-8 h-8" viewBox="0 0 1024 1024" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" p-id="3474" width="200" height="200">
+                            <path
+                                d="M226.592 896C167.616 896 128 850.48 128 782.736V241.264C128 173.52 167.616 128 226.592 128c20.176 0 41.136 5.536 62.288 16.464l542.864 280.432C887.648 453.792 896 491.872 896 512s-8.352 58.208-64.272 87.088L288.864 879.536C267.712 890.464 246.768 896 226.592 896z m0-704.304c-31.008 0-34.368 34.656-34.368 49.568v541.472c0 14.896 3.344 49.568 34.368 49.568 9.6 0 20.88-3.2 32.608-9.248l542.864-280.432c21.904-11.328 29.712-23.232 29.712-30.608s-7.808-19.28-29.712-30.592L259.2 200.96c-11.728-6.048-23.008-9.264-32.608-9.264z"
+                                fill="#8c9eff" p-id="3475"></path>
+                        </svg>
+                    </button>
                     <button class="btn btn-outline btn-primary mr-2" @click="openEditDialog(index)">
                         <svg t="1745055947649" class="icon w-8 h-8" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="1931" width="200" height="200">
@@ -293,6 +301,10 @@ export default {
                     item.whichDay = '四';
                 } else if (item.whichDay == 5) {
                     item.whichDay = '五';
+                } else if (item.whichDay == 6) {
+                    item.whichDay = '六';
+                } else if (item.whichDay == 7) {
+                    item.whichDay = '日';
                 }
             });
             // 格式化时间和班级编码
@@ -383,7 +395,7 @@ export default {
             this.isAdding = false;
             if (this.isAdd) {
                 this.addArrangement();
-            }else if (this.isAdd === false) {
+            } else if (this.isAdd === false) {
                 this.updateArrangement();
             }
         },
@@ -412,10 +424,24 @@ export default {
             this.isAdd = true;
         },
         // 跳转到考勤安排详情
-        gotoRota() {
-            this.$store.arrangement.userClass = this.attendanceSchedules[this.currentIndex].userClass;
-            this.$store.arrangement.arrangementId = this.attendanceSchedules[this.currentIndex].arrangementId;
-            this.$router.push({ path: '/manager/choose' });
+        gotoRota(index) {
+            // 设置当前索引
+            this.currentIndex = index !== undefined ? index : this.currentIndex;
+            
+            // 存储考勤安排ID和班级信息到状态管理
+            const currentSchedule = this.attendanceSchedules[this.currentIndex];
+            this.$store.arrangement.userClass = currentSchedule.userClass;
+            this.$store.arrangement.arrangementId = currentSchedule.arrangementId;
+            
+            // 解析班级信息并存储到状态管理
+            const class1 = currentSchedule.class1;
+            const class2 = currentSchedule.class2;
+            
+            // 设置班级信息到状态管理
+            this.$store.arrangement.setClassInfo(class1, class2);
+            
+            // 跳转到班级选择页面
+            this.$router.push({ path: '/head/classSelect' });
         }
     }
 };

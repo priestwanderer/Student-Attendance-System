@@ -23,7 +23,7 @@
                         <div class="placeholder">
                             <div class="w-32 rounded-full">
                                 <!-- 点击图片触发上传 -->
-                                <img :src="profileImage || 'https://api.lorem.space/image/face?w=128&h=128'"
+                                <img :src="profileImage || userInfo[0].img"
                                     alt="Profile Photo" @click="clickUpload" />
                             </div>
                             <label class="btn btn-sm btn-primary mb-4 flex justify-center" for="profile-photo">
@@ -111,7 +111,6 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
 import UserClass from '../../utils/UserClass';
 export default {
     name: 'StudentProfilePage',
@@ -138,6 +137,7 @@ export default {
                 this.userCollege = UserClass.getCollege(this.userInfo[0].college.toString());
                 console.log(this.userCollege);
             }
+
         },
         // 获取个人考勤结果
         async getRecordInfo() {
@@ -152,17 +152,6 @@ export default {
                     record.status = '请假';
                 }
             });
-            // 格式化时间和班级编码
-            this.attendanceRecords.forEach(record => {
-                if (record.time) {
-                    record.time = this.formatDate(record.time, 'YYYY-MM-DD');
-                }
-            });
-        },
-        // 格式化日期
-        formatDate(timestamp, format = 'YYYY-MM-DD') {
-            if (!timestamp) return '';
-            return dayjs(timestamp).format(format);
         },
         // 上传照片
         async uploadImg() {

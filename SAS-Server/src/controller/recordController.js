@@ -15,8 +15,8 @@ router.get('/getRecordInfo', async (req, res, next) => {
 });
 
 router.post('/addRecord', async (req, res, next) => {
-    const { arrangementId, studentId, status, time } = req.body;
-    const result = await recordService.addRecord(arrangementId, studentId, status, time);
+    const { data, arrangementId } = req.body;
+    const result = await recordService.addRecord(arrangementId, data);
     res.ResultVO(0, '成功', result);
 });
 

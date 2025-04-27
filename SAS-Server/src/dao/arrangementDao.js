@@ -69,7 +69,7 @@ exports.addArrangement = async (userClass, course, time, whichCourse, classroom,
 };
 
 // 修改考勤安排
-exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom, adminOne, adminTwo) => {
+exports.updateArrangement = async (arrangementId, userClass, course, time, whichCourse, classroom) => {
     const sql = `
         UPDATE 
             arrangement
@@ -78,13 +78,11 @@ exports.updateArrangement = async (arrangementId, userClass, course, time, which
             course = ?, 
             time = ?, 
             which_course = ?, 
-            classroom = ?, 
-            adminOne = ?
-            adminTwo = ?
+            classroom = ?
         WHERE 
             id = ?
     `;
-    const sqlParams = [userClass, course, time, whichCourse, classroom, adminOne, adminTwo, arrangementId];
+    const sqlParams = [userClass, course, time, whichCourse, classroom, arrangementId];
     return await db.query(sql, sqlParams);
 };
 

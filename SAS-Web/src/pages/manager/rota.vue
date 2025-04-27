@@ -62,7 +62,7 @@ export default {
         return {
             items: [],
             PerfectAttendance: false,
-            userClass: '生物医学工程学院2022级1班',
+            userClass: '生物医学工程学院2024级',
         };
     },
     methods: {

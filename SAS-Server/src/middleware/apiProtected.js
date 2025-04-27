@@ -8,8 +8,6 @@ const authService = require('../service/authService');
 // 接口前缀白名单
 const apiPrefixWhiteList = [
     '/auth', // 认证相关接口
-    '/user', // 用户相关接口
-    '/record', // 考勤记录相关接口
     '/arrangement' // 考勤安排相关接口
 ];
 

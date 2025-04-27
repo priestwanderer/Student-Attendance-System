@@ -59,15 +59,18 @@ exports.getRecordInfo = async (studentId) => {
 };
 
 // 新增考勤记录
-exports.addRecord = async (arrangementId, studentId, status, time) => {
-    const sql = `
+exports.addRecord = async (arrangementId, data) => {
+    data.forEach(async (item) => {
+        const sql = `
         INSERT INTO 
             record
         (arrangement_id, id, user_id, status, created_at)
         VALUES (?, ?, ?, ?, NOW())
     `;
-    const sqlParams = [arrangementId, uuidv7(), studentId, status, time];
-    return await db.query(sql, sqlParams);
+        const sqlParams = [arrangementId, uuidv7(), item.studentId, item.status];
+        await db.query(sql, sqlParams);
+    });
+    return true;
 };
 
 // 修改考勤记录

@@ -34,6 +34,20 @@ const routes = [
         }
     },
     {
+        path: '/choose',
+        name: 'choose',
+        component: () => import('@/pages/manager/choose.vue')
+    },
+    {
+        path: '/classSelect',
+        name: 'classSelect',
+        component: () => import('@/pages/manager/classSelect.vue'),
+        meta: {
+            title: '班级选择',
+            freeAuth: true
+        }
+    },
+    {
         path: '/head',
         name: 'head',
         component: () => import('@/pages/user/head.vue'),
@@ -57,6 +71,24 @@ const routes = [
                 component: () => import('@/pages/manager/rota.vue'),
                 meta: {
                     title: '考勤',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'classSelect',
+                name: 'classSelect',
+                component: () => import('@/pages/manager/classSelect.vue'),
+                meta: {
+                    title: '班级选择',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'classRate/:classNumber',
+                name: 'classRate',
+                component: () => import('@/pages/manager/classRate.vue'),
+                meta: {
+                    title: '班级考勤',
                     freeAuth: true
                 }
             },

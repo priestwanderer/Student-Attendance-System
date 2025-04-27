@@ -1,8 +1,42 @@
+const { list } = require('ali-oss/lib/object');
 const userDao = require('../dao/userDao');
 
 exports.getUserList = async () => {
     const userList = await userDao.getUserList();
     return userList;
+};
+
+// 根据班级编码获取用户列表
+exports.getUserListByClass = async (classCode) => {
+    // 获取所有用户
+    const userList = await userDao.getUserList();
+    // 如果没有提供班级编码，返回所有用户
+    if (!classCode) {
+        return userList;
+    }
+    let year;
+    let collegeCode;
+    let theclassCode;
+    // 如果班级编码包含空格，可能是需要处理的格式
+    const parts = classCode.split('');
+    if (parts.length === 6) {
+        // 假设格式为 'YY MM DD'，转换为 '20YY MM DD'
+        year = '20' + `${parts[0]}` + `${parts[1]}`;
+        collegeCode = `${parts[3]}`; // 去除前导零
+        if (parts[4] === '0') {
+            theclassCode = `${parts[5]}`;
+        } else {
+            theclassCode = `${parts[4]}${parts[5]}`;
+        }
+    }
+    console.log(year, collegeCode, theclassCode);
+    // 筛选匹配班级编码的用户
+    const filteredUsers = userList.filter((user) => {
+        // 用户的班级编码可能存储在 userClass 字段中
+        return user.grade == year && user.college == collegeCode && user.userClass == theclassCode;
+    });
+    console.log(filteredUsers);
+    return filteredUsers;
 };
 
 exports.getUserInfo = async (studentId) => {
