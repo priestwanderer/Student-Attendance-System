@@ -28,11 +28,11 @@
                 <ul class="menu flex-grow w-full flex items-center">
                     <li
                         class="mb-5 w-full">
-                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goArrangement">安排</a>
+                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goHome">主页</a>
                     </li>
                     <li
                         class="mb-5 w-full">
-                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goRota">考勤</a>
+                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goArrangement">安排</a>
                     </li>
                     <li
                         class="mb-5 w-full">
@@ -40,7 +40,11 @@
                     </li>
                     <li
                         class="mb-5 w-full">
-                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goLogin">退出</a>
+                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goRota">24生工院花名册</a>
+                    </li>
+                    <li
+                        class="mb-5 w-full">
+                        <a class="w-full text-xl text-[#8c9eff] border-2 flex justify-center" @click="goSelect">退出</a>
                     </li>
                 </ul>
             </div>
@@ -63,6 +67,9 @@ export default {
     updated() { }, // 组件的生命周期钩子，更新时调用
     methods: {
         //  path 写的是路由里面定义的url路径，不是文件夹的相对路径
+        goHome() {
+            this.$router.push({ path: '/head/home' });
+        },
         goArrangement() {
             this.$router.push({ path: '/head/arrangement' });
         },
@@ -72,8 +79,8 @@ export default {
         goRecord() {
             this.$router.push({ path: '/head/record' });
         },
-        goLogin() {
-            this.$router.push({ path: '/login' });
+        goSelect() {
+            this.$router.push({ path: '/select' });
         }
     }, // 定义组件的方法
 };

@@ -25,13 +25,13 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { useArrangementStore } from '@/stores/arrangement';
+import { arrangementStore } from '@/stores/arrangement';
 import kaoqinClass from '@/utils/kaoqinClass';
 
 export default defineComponent({
     name: 'SelectPage',
     setup() {
-        const arrangementStore = useArrangementStore();
+        const arrangementStore = arrangementStore();
         return { arrangementStore };
     },
     computed: {

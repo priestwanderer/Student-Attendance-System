@@ -40,6 +40,8 @@ exports.getArrangement = async (whichWeek) => {
         arrangement.class AS userClass,
         arrangement.course AS course,
         arrangement.time AS time,
+        a.name AS adminOne,
+        b.name AS adminTwo,
         arrangement.which_course AS whichCourse,
         arrangement.classroom AS classroom,
         school_calendar.academic_year AS academicYear,
@@ -51,6 +53,10 @@ exports.getArrangement = async (whichWeek) => {
         arrangement
     INNER JOIN
         school_calendar ON arrangement.time = school_calendar.date
+    INNER JOIN
+        admin a ON arrangement.adminOne = a.student_id
+    INNER JOIN
+        admin b ON arrangement.adminTwo = b.student_id
     WHERE
         school_calendar.which_week = ?
     `;
