@@ -217,7 +217,7 @@
             </div>
         </dialog>
         <!-- 删除确认对话框 -->
-        <div v-if="isConfirm" class="fixed top-0 left-0 w-full h-full flex items-center justify-center">
+        <div v-if="isConfirm" class="bg-black/50 fixed top-0 left-0 w-full h-full flex items-center justify-center">
             <div class="bg-white p-6 rounded-lg w-80 text-center">
                 <p class="text-lg mb-6">确定要删除这个考勤安排吗？</p>
                 <div class="flex justify-center gap-4">

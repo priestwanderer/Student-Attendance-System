@@ -57,6 +57,15 @@ const routes = [
         },
         children: [
             {
+                path: 'home',
+                name: 'home',
+                component: () => import('@/pages/manager/home.vue'),
+                meta: {
+                    title: '主页',
+                    freeAuth: true
+                }
+            },
+            {
                 path: 'arrangement',
                 name: 'arrangement',
                 component: () => import('@/pages/manager/arrangement.vue'),
@@ -99,20 +108,18 @@ const routes = [
                 meta: {
                     title: '记录',
                     freeAuth: true
-                },
-                children: [
-                    {
-                        path: 'recordDetail',
-                        name : 'recordDetail',
-                        component: () => import('@/pages/manager/recordDetail.vue'),
-                        meta: {
-                            title: '记录详情',
-                            freeAuth: true
-                        }
-                    }
-                ]
+                }
+            },
+            {
+                path: 'recordDetail',
+                name: 'recordDetail',
+                component: () => import('@/pages/manager/recordDetail.vue'),
+                meta: {
+                    title: '记录详情',
+                    freeAuth: true
+                }
             }
-        ],
+        ]
     }
 ];
 

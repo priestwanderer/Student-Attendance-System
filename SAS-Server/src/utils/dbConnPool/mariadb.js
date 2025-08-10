@@ -32,6 +32,7 @@ const generateSql = (sql, params) => {
 exports.query = async (sql, sqlParams) => {
     let conn;
     try {
+        conn = await pool.getConnection();
         console.log('Executing SQL query:', generateSql(sql, sqlParams));
         return await pool.query(sql, sqlParams);
     } catch (err) {

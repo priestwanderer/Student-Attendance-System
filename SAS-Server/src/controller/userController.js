@@ -38,6 +38,16 @@ const storage = multer.diskStorage({
 
 const userService = require('../service/userService');
 
+/**
+ * @name getUserList
+ * @description 获取用户列表
+ * @query {string} studentId - 学号
+ * @query {string} userName - 姓名
+ * @query {string} college - 学院
+ * @query {string} grade - 年级
+ * @query {string} major - 专业
+ * @query {string} userClass - 班级
+ */
 router.get('/getUserList', async (req, res, next) => {
     // 获取请求中的班级参数
     const { class: className } = req.query;

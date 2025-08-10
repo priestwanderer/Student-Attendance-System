@@ -16,7 +16,7 @@
                     <span>{{ record.userClass }}</span>
                 </div>
                 <div>
-                    <button class="btn btn-outline btn-primary">详情</button>
+                    <button class="btn btn-outline btn-primary" @click="goToDetail(record.id)">详情</button>
                 </div>
             </div>
         </div>
@@ -61,6 +61,10 @@ export default {
             if (!timestamp) return '';
             return dayjs(timestamp).format(format);
         },
+        // 跳转到考勤记录详情页面
+        async goToDetail(recordId) {
+            await this.$router.push({ path: `/head/recordDetail`, query: { id: recordId } });
+        }
     },
 };
 </script>
